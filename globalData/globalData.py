@@ -1,0 +1,8 @@
+#-*- coding: utf-8 -*-
+#配置信息list
+CONFIGINFO_IP = ''
+CONFIGINFO_PORT = []
+CONFIGINFO_USERSNAME_PATH = ''
+CONFIGINFO_PASSWORDS_PATH = ''
+
+

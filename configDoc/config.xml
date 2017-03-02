@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+  <ip>192.168.2.1-192.168.2.255</ip>
+  <ports>
+    <port>21</port><!--ftp-->
+    <port>22</port><!--ssh-->
+    <port>23</port><!--telnet-->
+    <port>69</port><!--tffp-->
+    <port>25</port><!--smtp-->
+  </ports>
+  <usersNameDicPath>../configDoc/user.txt</usersNameDicPath>
+  <passwordsDicPath>../configDoc/passwords.txt</passwordsDicPath>
+</root>
